@@ -27,7 +27,7 @@ var contacts = [
 			"lname":"cutsinger",
 			"bio": "is Chief Alexa evangelist",
 			"city":"seattle",
-			"twitter":"@paulcutsinger",
+			"twitter":"paulcutsinger",
 			"prettyTwitter":"paul cutsinger",
 			"github":"paulcutsinger",
 			"linkedin":"https://www.linkedin.com/in/paulcutsinger",

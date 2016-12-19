@@ -1,6 +1,6 @@
-searchIntent who is {contactName}
-searchIntent find {contactName}
-searchIntent search for {contactName}
+SearchIntent who is {contactName}
+SearchIntent find {contactName}
+SearchIntent search for {contactName}
 TellMeMoreIntent tell me more
 TellMeMoreIntent give me his contact info
 TellMeMoreIntent give me her contact info

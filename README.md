@@ -3,6 +3,7 @@
 A skill with all the contact info for evangelists and SAs.
 
 ## What's implemented thus far
+- Uses Alexa Node SDK
 - Ask Alexa to search for a contact by first name - "Alexa, who is dave"
 - Logic to respond when the name is someone on our team and not,
 - Slots: for names, and also for info types - like twitter, github etc.

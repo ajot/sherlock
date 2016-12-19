@@ -12,7 +12,7 @@ var states = {
 var skillName = "Evangelist Finder:";
 
 // Message when the skill is first called
-var welcomeMessage = "Welcome to Sherlock - the Alexa evangelist finder. I can help you find more information about an Alexa Evangelist and Solutions Architects. Just say the first name of the person you would like to find info for, like who is Dave, or who is Paul";
+var welcomeMessage = "Welcome to Sherlock - the Alexa evangelist finder. I can help you find more information about an Alexa Evangelist and Solutions Architects. Just say the first name of the person you would like to find info for, like - who is Dave, or - who is Paul";
 
 // Message when the skill is first called
 var newSearchMessage = "Just say the first name of the person you would like to find, like who is paul, or find jeff";
@@ -75,7 +75,7 @@ var startSearchHandlers = Alexa.CreateStateHandler(states.SEARCHMODE, {
 
 				if (searchResult.matchFound == true){ //if match found
 					console.log(speechOutput);
-					speechOutput = searchResult.message + ". To learn more about, " + name + " you can say tell me more"
+					speechOutput = searchResult.message + ". To learn more about " + name + ", you can say - tell me more"
 					this.handler.state = states.DESCRIPTION; // change state to description
 					this.emit(':ask', speechOutput);
 					this.attributes['endedSessionCount'] += 1;
@@ -126,7 +126,7 @@ var descriptionHandlers = Alexa.CreateStateHandler(states.DESCRIPTION, {
 
 			var speechOutput = (sessionFirstName + "'s Twitter handle is " + sessionPrettyTwitter
         + ". That's spelled - " + helper.spellOut(sessionTwitter)
-        + ". You can check the Alexa companion app for Jeff'e contact info, like LinkedIn, GitHub and Twitter handle. Would you like to find another evangelist? Say yes or no");
+        + ". You can check the Alexa companion app for " + sessionFirstName + "'s contact info like LinkedIn, GitHub and Twitter handle. Would you like to find another evangelist?");
 			var repromptSpeech = "Would you like find another evangelist? Say yes or no";
 			console.log("the contact you're trying to find more info about is " + sessionFirstName);
 			this.handler.state = states.SEARCHMODE;
