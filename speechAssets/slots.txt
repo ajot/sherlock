@@ -1,0 +1,15 @@
+AMAZON.US_FIRST_NAME
+
+paul
+jeff
+memo
+rob
+dave
+michael
+amit
+
+LIST_OF_CONTACT_FIELDS
+
+twitter
+email
+city

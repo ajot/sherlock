@@ -1,0 +1,10 @@
+searchIntent who is {contactName}
+searchIntent find {contactName}
+searchIntent search for {contactName}
+TellMeMoreIntent tell me more
+TellMeMoreIntent give me his contact info
+TellMeMoreIntent give me her contact info
+TellMeMoreIntent what's the {contactInfo}
+TellMeMoreIntent what's his contact info
+TellMeMoreIntent what's her contact info
+TellMeMoreIntent give me the the {contactInfo}

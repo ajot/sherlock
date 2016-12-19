@@ -1,0 +1,43 @@
+{
+  "intents":[
+    {
+      "intent":"SearchIntent",
+      "slots":[
+        {
+          "name":"contactName",
+          "type":"AMAZON.US_FIRST_NAME"
+        }
+      ]
+    },
+    {
+      "intent":"TellMeMoreIntent",
+      "slots":[
+        {
+          "name":"contactInfo",
+          "type":"LIST_OF_CONTACT_FIELDS"
+        }
+      ]
+    },
+    {
+      "intent": "AMAZON.YesIntent",
+      "slots": []
+    },
+    {
+      "intent": "AMAZON.NoIntent",
+      "slots": []
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    },
+    {
+      "intent": "AMAZON.RepeatIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent",
+      "slots": []
+    }
+  ]
+}
