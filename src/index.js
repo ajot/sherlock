@@ -26,7 +26,7 @@ var descriptionStateHelpMessage = "Here are some things you can say: Tell me mor
 var NoDataMessage = "Sorry, I didn't find that.";
 
 // Used to tell user skill is closing
-var shutdownMessage = "Ok see you again soon.";
+var shutdownMessage = "Ok see you again soon. Don't forget to check us out at developer.amazon.com/alexa. Good bye!";
 
 // Used with stop and cancel intents
 var killSkillMessage = "Ok, great, see you next time.";
@@ -62,7 +62,7 @@ var startSearchHandlers = Alexa.CreateStateHandler(states.SEARCHMODE, {
 	 'SearchIntent':function(){
 			var contactNameSlot = this.event.request.intent.slots.contactName;
 			var speechOutput;
-			var cardTitle;
+			// var cardTitle;
 			var cardContent;
 
 			console.log("contactNameSlot:" + contactNameSlot);
@@ -75,7 +75,7 @@ var startSearchHandlers = Alexa.CreateStateHandler(states.SEARCHMODE, {
 
 				if (searchResult.matchFound == true){ //if match found
 					console.log(speechOutput);
-					speechOutput = searchResult.message + ". To learn more about " + name + ", you can say - tell me more"
+					speechOutput = searchResult.message + ". To learn more about " + name + ", you can say - tell me more. You can also say - what's his twitter handle, or tell me his GitHub username"
 					this.handler.state = states.DESCRIPTION; // change state to description
 					this.emit(':ask', speechOutput);
 					this.attributes['endedSessionCount'] += 1;
@@ -109,28 +109,65 @@ var startSearchHandlers = Alexa.CreateStateHandler(states.SEARCHMODE, {
 });
 
 var descriptionHandlers = Alexa.CreateStateHandler(states.DESCRIPTION, {
-	'TellMeMoreIntent': function() {
+  'TellMeMoreIntent': function() {
+      var sessionObject = this.attributes.currentContact.theContact;
+      var sessionPrettyTwitter = sessionObject["prettyTwitter"];
+
+      var cardContent = helper.generateCard(sessionObject); //calling the helper function to generate the card content.
+
+      var speechOutput = (sessionObject["fname"] + "'s Twitter handle is " + sessionPrettyTwitter
+        + helper.spellOut(sessionObject["twitter"])
+        + ". You can check the Alexa companion app for " + sessionObject["fname"]
+        + "'s contact info like, LinkedIn, GitHub and Twitter handle. Would you like to find another evangelist?");
+
+      var repromptSpeech = "Would you like find another evangelist? Say yes or no";
+      console.log("the contact you're trying to find more info about is " + sessionObject["fname"]);
+      this.handler.state = states.SEARCHMODE;
+      this.emit(':askWithCard', speechOutput, repromptSpeech, cardContent.title, cardContent.body,cardContent.image);
+  },
+	'TellMeThisIntent': function() {
+      var infoTypeSlot = this.event.request.intent.slots.infoType;
 			var sessionObject = this.attributes.currentContact.theContact;
-			var sessionFirstName = sessionObject["fname"];
-			var sessionLastName = sessionObject["lname"];
-			var sessionTwitter = sessionObject["twitter"];
-			var sessionPrettyTwitter = sessionObject["prettyTwitter"];
-			var cardTitle = 'Contact Info for ' + helper.titleCase(sessionFirstName) + " " + helper.titleCase(sessionLastName);
+      var answer;
+      var infoTypeLabel;
 
-      //creating card content that will be sent to the Alexa app.
-			var cardContent =
-					helper.titleCase(sessionObject["fname"]) + " " + helper.titleCase(sessionObject["lname"]) + " \n"
-					+ "Twitter: " + "@" + sessionObject["twitter"] + " \n"
-					+ "GitHub: " + sessionObject["github"] + " \n"
-					+ "LinkedIn: " + sessionObject["linkedin"];
+      switch (infoTypeSlot.value){
+        case "twitter":
+          answer = "@" + sessionObject["twitter"];
+          infoTypeLabel = "Twitter";
+          break;
+        case "github":
+          answer = sessionObject["github"];
+          infoTypeLabel = "GitHub";
+          break;
+        case "linkedin":
+          answer = sessionObject["linkedin"];
+          infoTypeLabel = "LinkedIn";
+          break;
+        default:
+          console.log("Sorry, I don't have that information");
+      }
 
-			var speechOutput = (sessionFirstName + "'s Twitter handle is " + sessionPrettyTwitter
-        + ". That's spelled - " + helper.spellOut(sessionTwitter)
-        + ". You can check the Alexa companion app for " + sessionFirstName + "'s contact info like LinkedIn, GitHub and Twitter handle. Would you like to find another evangelist?");
-			var repromptSpeech = "Would you like find another evangelist? Say yes or no";
-			console.log("the contact you're trying to find more info about is " + sessionFirstName);
-			this.handler.state = states.SEARCHMODE;
-			this.emit(':askWithCard', speechOutput, repromptSpeech, cardTitle, cardContent);
+      if (answer.length ==0){
+        //not a valid slot. no card needs to be set up. respond with simply a voice response.
+        var speechOutput = "Sorry, that was not a valid choice. You can ask me - what's his twitter, or give me his GitHub username"
+        var repromptSpeech = "You can ask me - what's his twitter, or give me his GitHub username";
+        this.handler.state = states.SEARCHMODE;
+      }
+      else{
+        var cardContent = helper.generateCard(sessionObject);
+        var speechOutput = (sessionObject["fname"] + "'s " + infoTypeLabel + " is - "
+          + sessionObject["prettyTwitter"]
+          + helper.spellOut(sessionObject["prettyTwitter"])
+          + ". You can check the Alexa companion app for "
+          + sessionObject["fname"]
+          + "'s contact info like LinkedIn, GitHub and Twitter handle. Would you like to find another evangelist?");
+
+        var repromptSpeech = "Would you like find another evangelist? Say yes or no";
+        console.log("the contact you're trying to find more info about is " + sessionObject["fname"]);
+      }
+      this.handler.state = states.SEARCHMODE; //TODO: change this to DESCRIPTION mode to allow user to daisy chain questions for the active contact
+      this.emit(':askWithCard', speechOutput, repromptSpeech, cardContent.title, cardContent.body,cardContent.image);
 	},
 	'AMAZON.HelpIntent': function () {
       this.emit(':ask', descriptionStateHelpMessage, descriptionStateHelpMessage);
@@ -165,7 +202,8 @@ function searchByFirstName(name){
 		if (name.toLowerCase() == data[i].fname){
 			matchFound = true;
 			console.log("Found in " + (i+1) + " rounds");
-			message = (data[i].fname + " " + data[i].lname + " " + data[i].bio + " based out of " + data[i].city);
+			// message = (data[i].fname + " " + data[i].lname + " " + data[i].bio + " based out of " + data[i].city + ", and joined the Alexa team in " + data[i].alexaJoinDate);
+      message = data[i].fname + " " + data[i].lname + " " + data[i].bio + ". He joined the Alexa team in " + data[i].alexaJoinDate + ", and is based out of " + data[i].city;
 			break; //if found, break out of the for loop.
 		}
 	}
@@ -188,6 +226,19 @@ var helper = {
   	return str.replace(str[0],str[0].toUpperCase());
 	},
 	spellOut: function (str){
-	  return str.split('').join('<break time="0.05s"/>');
-	}
+	  return ". That's spelled - " + str.split('').join('<break time="0.05s"/>');
+	},
+  generateCard: function(sessionObject){
+    //creating card content that will be sent to the Alexa app.
+    var cardTitle = 'Contact Info for ' + helper.titleCase(sessionObject["fname"]) + " " + helper.titleCase(sessionObject["lname"]);
+    var cardBody = "Twitter: " + "@" + sessionObject["twitter"] + " \n"
+        + "GitHub: " + sessionObject["github"] + " \n"
+        + "LinkedIn: " + sessionObject["linkedin"];
+    var imageObj = {
+      smallImageUrl: 'https://ajotwani.s3.amazonaws.com/sherlock/images/' + sessionObject["fname"] + ".jpg",
+      largeImageUrl: 'https://ajotwani.s3.amazonaws.com/sherlock/images/' + sessionObject["fname"] + ".jpg",
+    };
+
+    return {"title":cardTitle,"body":cardBody,"image":imageObj};
+  }
 };

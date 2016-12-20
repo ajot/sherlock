@@ -9,7 +9,8 @@ var contacts = [
 			"prettyTwitter":"the dave dev",
 			"github":"disbitski",
 			"linkedin":"https://www.linkedin.com/in/davidisbitski",
-			"email":"isbitski@amazon.com"
+			"email":"isbitski@amazon.com",
+			"alexaJoinDate":"October 2015"
 		},
 		{
 			"fname":"amit",
@@ -20,7 +21,8 @@ var contacts = [
 			"prettyTwitter":"amit",
 			"github":"ajot",
 			"linkedin":"https://www.linkedin.com/in/ajotwani",
-			"email":"ajot@amazon.com"
+			"email":"ajot@amazon.com",
+			"alexaJoinDate":"February 2016"
 		},
 		{
 			"fname":"paul",
@@ -31,7 +33,8 @@ var contacts = [
 			"prettyTwitter":"paul cutsinger",
 			"github":"paulcutsinger",
 			"linkedin":"https://www.linkedin.com/in/paulcutsinger",
-			"email":"cutsinge@amazon.com"
+			"email":"cutsinge@amazon.com",
+			"alexaJoinDate":"January 2016"
 		},
 		{
 			"fname":"jeff",
@@ -42,7 +45,8 @@ var contacts = [
 			"prettyTwitter":"jeff blankenburg",
 			"github":"jeffblankenburg",
 			"linkedin":"https://www.linkedin.com/in/paulcutsinger",
-			"email":"jeffblan@amazon.com"
+			"email":"jeffblan@amazon.com",
+			"alexaJoinDate":"September 2016"
 		},
 		{
 			"fname":"rob",
@@ -53,7 +57,8 @@ var contacts = [
 			"prettyTwitter":"rob mccauley",
 			"github":"robm26",
 			"linkedin":"https://www.linkedin.com/in/robm26",
-			"email":"mccaul@amazon.com"
+			"email":"mccaul@amazon.com",
+			"alexaJoinDate":"February 2016"
 		},
 		{
 			"fname":"memo",
@@ -64,7 +69,20 @@ var contacts = [
 			"prettyTwitter":"memo doring",
 			"github":"memodoring",
 			"linkedin":"https://www.linkedin.com/in/guillermodoring",
-			"email":"doringm@amazon.com"
+			"email":"doringm@amazon.com",
+			"alexaJoinDate":"April 2016"
+		},
+		{
+			"fname":"michael",
+			"lname":"palermo",
+			"bio": "is Alexa Smart Home evangelist",
+			"city":"phoenix",
+			"twitter":"palermo4",
+			"prettyTwitter":"palermo4",
+			"github":"palermo4",
+			"linkedin":"https://www.linkedin.com/in/palermo4",
+			"email":"johniv@amazon.com",
+			"alexaJoinDate":"April 2016"
 		}
 	]
 module.exports = contacts;

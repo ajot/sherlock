@@ -1,14 +1,6 @@
-#Contact Info Skill
+# Sherlock - Alexa evangelist finder
 
-A skill with all the contact info for evangelists and SAs.
-
-## What's implemented thus far
-- Uses Alexa Node SDK
-- Ask Alexa to search for a contact by first name - "Alexa, who is dave"
-- Logic to respond when the name is someone on our team and not,
-- Slots: for names, and also for info types - like twitter, github etc.
-- Would you like to learn more - yes/no is handles using the built-in Yes/No
-intents
+An Alexa skill built using the Alexa Node SDK, that lets you find information about Alexa evangelists and Solutions Architects.
 
 ## The flow
 **Initial question**
@@ -23,11 +15,24 @@ intents
 - session attributes to support context (ex: "what's his linked in" would reference the person previously referenced)
 - states based handling of intents - search mode and description mode
 - data look up from an array includes in an external JS file.
-- SSML tags to spell out the twitter handle in a natural way.
-- send properly formatted cards with contact info to the Alexa companion app
+- SSML tags to spell out the twitter and github handle in a slightly sped up, but natural way.
+- send properly formatted cards with contact info to the Alexa companion app, along with images.
 - Context: store the active contact as an object in session attributes, so Alexa can can
 reply to the question - "tell me more" with context.
 
+## What's implemented thus far
+- Ask Alexa to search for a contact by first name - "Alexa, who is dave"
+- Logic to respond when the name is someone on our team and not,
+- Slots: for names, and also for info types - like twitter, github etc.
+- Would you like to learn more - yes/no is handles using the built-in Yes/No intents
+- Check all variable names in the card content part - specifically cardTitle may not be needed in SearchIntent
+- Create a helper function for generating card content. this should be used by the TellMeMoreIntent and TellMeThisIntent
+- Add images for the evangelists
+- Say the twitter handle, then spell it.
+
 ## TODO
-- Alexa, ask sherlock who is {dave}
+- Allow user to daisy chain questions for an active contact.
 - Answer more context specific questions, like "where does he live?", "what's his github handle"
+- Add more bio information for everyone.
+- Populate with more data from the ASK SA team.
+- Alexa, ask sherlock who is {dave}

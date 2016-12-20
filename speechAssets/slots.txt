@@ -8,8 +8,8 @@ dave
 michael
 amit
 
-LIST_OF_CONTACT_FIELDS
+LIST_OF_INFO_TYPES
 
 twitter
-email
-city
+github
+linkedin

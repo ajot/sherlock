@@ -4,7 +4,20 @@ SearchIntent search for {contactName}
 TellMeMoreIntent tell me more
 TellMeMoreIntent give me his contact info
 TellMeMoreIntent give me her contact info
-TellMeMoreIntent what's the {contactInfo}
+TellMeMoreIntent what's the contactInfo
 TellMeMoreIntent what's his contact info
 TellMeMoreIntent what's her contact info
-TellMeMoreIntent give me the the {contactInfo}
+TellMeMoreIntent give me the the contactInfo
+TellMeThisIntent what's the {infoType}
+TellMeThisIntent give me his {infoType}
+TellMeThisIntent give me her {infoType}
+TellMeThisIntent what's his {infoType} handle
+TellMeThisIntent what's his {infoType} username
+TellMeThisIntent give me his {infoType} handle
+TellMeThisIntent give me his {infoType} username
+TellMeThisIntent give me her {infoType} handle
+TellMeThisIntent what's her {infoType} username
+TellMeThisIntent tell me his {infoType} handle
+TellMeThisIntent tell me his {infoType} username
+TellMeThisIntent tell me her {infoType} handle
+TellMeThisIntent tell me her {infoType} username

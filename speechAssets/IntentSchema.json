@@ -11,10 +11,14 @@
     },
     {
       "intent":"TellMeMoreIntent",
+      "slots":[]
+    },
+    {
+      "intent":"TellMeThisIntent",
       "slots":[
         {
-          "name":"contactInfo",
-          "type":"LIST_OF_CONTACT_FIELDS"
+          "name":"infoType",
+          "type":"LIST_OF_INFO_TYPES"
         }
       ]
     },
