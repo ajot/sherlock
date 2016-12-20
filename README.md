@@ -9,6 +9,15 @@ An Alexa skill built using the Alexa Node SDK, that lets you find information ab
 **Follow up question**
 "Tell me more" or "Give me his contact info"
 
+## People in the database right now
+- paul
+- jeff
+- memo
+- rob
+- dave
+- michael
+- amit
+
 ## Concepts
 - Intents: SearchIntent (search for a contact) and TellMeMoreIntent (give more details about a contact just searched for)
 - Slots: built in name slots, extending those with custom names
